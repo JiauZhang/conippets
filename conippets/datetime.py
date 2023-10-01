@@ -1,6 +1,7 @@
 import datetime as datetime_
 
 timedelta = datetime_.timedelta
+now = datetime_.datetime.now
 utcnow = datetime_.datetime.utcnow
 fromtimestamp = datetime_.datetime.fromtimestamp
 timestamp = datetime_.datetime.timestamp

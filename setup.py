@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name = 'conippets',
     packages = find_packages(exclude=['examples']),
-    version = '0.0.4',
+    version = '0.0.5',
     license='MIT',
     description = 'conippets',
     author = 'JiauZhang',
@@ -14,10 +14,12 @@ setup(
     keywords = [
     ],
     install_requires=[
+        'lxml',
     ],
     classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3.8',
     ],
+    python_requires=">=3.8",
 )
