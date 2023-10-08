@@ -4,6 +4,7 @@ timedelta = datetime_.timedelta
 now = datetime_.datetime.now
 utcnow = datetime_.datetime.utcnow
 fromtimestamp = datetime_.datetime.fromtimestamp
+utcfromtimestamp = datetime_.datetime.utcfromtimestamp
 timestamp = datetime_.datetime.timestamp
 fromisoformat = datetime_.datetime.fromisoformat
 
