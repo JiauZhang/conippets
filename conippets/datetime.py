@@ -3,6 +3,7 @@ import datetime as datetime_
 timedelta = datetime_.timedelta
 now = datetime_.datetime.now
 utcnow = datetime_.datetime.utcnow
+# return timestamp + utcoffset
 fromtimestamp = datetime_.datetime.fromtimestamp
 utcfromtimestamp = datetime_.datetime.utcfromtimestamp
 timestamp = datetime_.datetime.timestamp
