@@ -1,6 +1,6 @@
 import httpx
+from lxml.etree import HTML as parse_html
 import conippets.json as json
-import conippets.lxml as lxml
 
 _repo_data_xpath_ = '//react-partial[@partial-name="repos-overview"]/script[@data-target="react-partial.embeddedData"]'
 _code_data_xpath_ = '//react-app[@app-name="react-code-view"]/script[@data-target="react-app.embeddedData"]'
@@ -8,7 +8,7 @@ _code_data_xpath_ = '//react-app[@app-name="react-code-view"]/script[@data-targe
 def get_repo_data(user, repo):
     url = f'https://github.com/{user}/{repo}'
     r = httpx.get(url, follow_redirects=True)
-    html = lxml.parse_html(r.text)
+    html = parse_html(r.text)
     repo_data = html.xpath(_repo_data_xpath_)[0]
     repo_data = json.loads(repo_data.text)
     return repo_data
@@ -25,7 +25,7 @@ def currentOid(user, repo):
 
 def get_code_data(url):
     r = httpx.get(url, follow_redirects=True)
-    html = lxml.parse_html(r.text)
+    html = parse_html(r.text)
     code_data = html.xpath(_code_data_xpath_)[0]
     code_data = json.loads(code_data.text)
     return code_data

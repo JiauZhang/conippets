@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name = 'conippets',
     packages = find_packages(exclude=['examples']),
-    version = '0.0.10',
+    version = '0.1.0',
     license='MIT',
     description = 'conippets',
     author = 'JiauZhang',
@@ -13,9 +13,9 @@ setup(
     long_description_content_type = 'text/markdown',
     keywords = [
     ],
-    install_requires=[
-        'lxml', 'httpx',
-    ],
+    extras_require={
+        'git': ['lxml', 'httpx'],
+    },
     classifiers=[
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
