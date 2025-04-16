@@ -7,11 +7,11 @@ dumps = json_.dumps
 
 del json_
 
-def read(file, mode='r', encoding='utf-8', **kwargs):
-    with open(file, mode=mode, encoding=encoding, **kwargs) as f:
+def read(file, mode='r', encoding='utf-8'):
+    with open(file, mode=mode, encoding=encoding) as f:
         data = load(f)
     return data
 
-def write(file, data, mode='w+', encoding='utf-8', indent=4, **kwargs):
+def write(file, data, mode='w', encoding='utf-8', indent=4):
     with open(file, mode=mode, encoding=encoding) as f:
-        dump(data, f, ensure_ascii=False, indent=indent, **kwargs)
+        dump(data, f, ensure_ascii=False, indent=indent)
