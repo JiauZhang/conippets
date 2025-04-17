@@ -1,9 +1,10 @@
 from setuptools import setup, find_packages
+from conippets import __version__
 
 setup(
     name = 'conippets',
     packages = find_packages(exclude=['examples']),
-    version = '0.1.2',
+    version = __version__,
     license='MIT',
     description = 'conippets',
     author = 'JiauZhang',
