@@ -1,10 +1,10 @@
 from conippets import json
 
-def read(file, mode='r', encoding='utf-8'):
-    with open(file, mode=mode, encoding=encoding) as f:
-        for line in f:
-            data = json.loads(line)
-            yield data
+def read(file, encoding='utf-8', eager=True):
+    with open(file, mode='r', encoding=encoding) as f:
+        generator = (json.loads(line) for line in f)
+        if eager: return list(generator)
+        else: yield from generator
 
 def __writelines__(file, data, *, mode, encoding):
     with open(file, mode=mode, encoding=encoding) as f:
