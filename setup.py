@@ -15,7 +15,6 @@ setup(
     keywords = [
     ],
     extras_require={
-        'git': ['lxml', 'httpx'],
     },
     classifiers=[
         'Intended Audience :: Developers',
