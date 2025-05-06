@@ -9,7 +9,9 @@ class Config(dict):
                 self[k] = Config(v)
 
     def __getattr__(self, name):
-        return self[name] if name in self else None
+        if name not in self:
+            self[name] = Config()
+        return self[name]
 
     def __setattr__(self, name, value):
         self[name] = value
