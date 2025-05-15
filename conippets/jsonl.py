@@ -13,6 +13,9 @@ def __writelines__(file, data, *, mode, encoding):
             line = json.dumps(item, ensure_ascii=False, indent=None)
             f.write(line + '\n')
 
+def clear(file):
+    __writelines__(file, [], mode='w', encoding='utf-8')
+
 def write(file, data, encoding='utf-8'):
     __writelines__(file, data, mode='w', encoding=encoding)
 
