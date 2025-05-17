@@ -17,6 +17,9 @@ class Config(dict):
     def __setattr__(self, name, value):
         self[name] = value
 
+    def get(self, name, default):
+        return default if name not in self else self[name]
+
     @staticmethod
     def from_json(file):
         cfg = json.read(file)
