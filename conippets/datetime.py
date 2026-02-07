@@ -1,15 +1,16 @@
-import datetime as datetime_
+from datetime import datetime, UTC, timedelta
 
-timedelta = datetime_.timedelta
-now = datetime_.datetime.now
-utcnow = datetime_.datetime.utcnow
+now = datetime.now
 # return timestamp + utcoffset
-fromtimestamp = datetime_.datetime.fromtimestamp
-utcfromtimestamp = datetime_.datetime.utcfromtimestamp
-timestamp = datetime_.datetime.timestamp
-fromisoformat = datetime_.datetime.fromisoformat
+fromtimestamp = datetime.fromtimestamp
+timestamp = datetime.timestamp
+fromisoformat = datetime.fromisoformat
 
-del datetime_
+def utcnow():
+    return now(UTC)
+
+def utcfromtimestamp(t):
+    return fromtimestamp(t, UTC)
 
 def localtime(hours=8):
     utc_time = utcnow()

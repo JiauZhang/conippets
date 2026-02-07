@@ -1,6 +1,6 @@
 ### Install
 ```shell
-pip install -U conippets
+pip install conippets
 ```
 
 ### Sponsor

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["hatchling>=1.27.0"]
+build-backend = "hatchling.build"
+
+[project]
+name = "conippets"
+dynamic = ["version"]
+description = "code snippets"
+readme = "README.md"
+authors = [
+    {name = "Jiau Zhang", email = "jiauzhang@163.com"},
+]
+license = {file = "LICENSE"}
+classifiers = []
+keywords = []
+requires-python = ">=3.10"
+dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/jiauzhang/conippets"
+
+[tool.hatch.version]
+path = "conippets/version.py"
+
+[tool.hatch.build.targets.wheel]
+packages = ["conippets"]
