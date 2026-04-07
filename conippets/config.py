@@ -12,20 +12,17 @@ class Config(dict):
         if name in self:
             return self[name]
         else:
-            raise AttributeError(f"'Config' object has no attribute '{name}'")
+            raise AttributeError(f"'Config' object has no attribute '{name}'.")
 
     def __setattr__(self, name, value):
         self[name] = value
 
-    def get(self, name, default):
-        return default if name not in self else self[name]
-
-    @staticmethod
-    def from_json(file):
+    @classmethod
+    def from_json(cls, file):
         cfg = json.read(file)
         if not isinstance(cfg, dict):
-            raise RuntimeError("Only 'dict' object is supported!")
-        return Config(**cfg)
+            raise TypeError(f"JSON root must be a dict, got {type(cfg).__name__}.")
+        return cls(**cfg)
 
     def save(self, file):
         json.write(file, self)
