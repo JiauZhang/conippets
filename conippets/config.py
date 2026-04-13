@@ -1,24 +1,21 @@
 from conippets import json
 
 class Config(dict):
-    def __init__(self, *, __key_trace__=[], **kwargs):
+    def __init__(self, **kwargs):
+        kwargs = {
+            k: Config(**v) if isinstance(v, dict) else v
+            for k, v in kwargs.items()
+        }
         super().__init__(**kwargs)
-
-        self.__key_trace__ = __key_trace__
-        for k, v in self.items():
-            if isinstance(v, dict):
-                self[k] = Config(**v, __key_trace__=self.__key_trace__+[k])
 
     def __getattr__(self, name):
         if name in self:
             return self[name]
-        else:
-            key_trace = self.__key_trace__ + [name]
-            raise AttributeError(f"'Config' object has no attribute '{'.'.join(key_trace)}'.")
+        raise AttributeError(f"'Config' object has no attribute '{name}'")
 
     def __setattr__(self, name, value):
         if isinstance(value, dict):
-            value = Config(**value, __key_trace__=self.__key_trace__+[name])
+            value = Config(**value)
         self[name] = value
 
     @classmethod
