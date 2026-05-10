@@ -2,11 +2,16 @@ from conippets import json
 
 class Config(dict):
     def __init__(self, **kwargs):
-        kwargs = {
-            k: Config(**v) if isinstance(v, dict) else v
-            for k, v in kwargs.items()
-        }
-        super().__init__(**kwargs)
+        cfg_kwargs = {}
+        for k, v in kwargs.items():
+            if isinstance(v, dict):
+                cfg_kwargs[k] = Config(**v)
+            elif isinstance(v, (list, tuple)):
+                cfg_kwargs[k] = [Config(**vi) if isinstance(vi, dict) else vi for vi in v]
+            else:
+                cfg_kwargs[k] = v
+
+        super().__init__(**cfg_kwargs)
 
     def __getattr__(self, name):
         if name in self:
