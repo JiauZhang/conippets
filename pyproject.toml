@@ -24,3 +24,17 @@ path = "conippets/version.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["conippets"]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.3.4",
+    "black>=26.3.0",
+]
+
+[tool.black]
+line-length = 128
+
+[tool.pytest.ini_options]
+minversion = "8.0"
+addopts = "-ra -q"
+testpaths = ["tests"]
