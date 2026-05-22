@@ -1,5 +1,6 @@
 from conippets.shell import Shell
 import pytest
+import time
 
 
 def test_basic_stdout(timeout):
@@ -125,3 +126,33 @@ def test_exit_code_override_timeout(timeout):
     with Shell() as sh:
         r = sh.run("echo hi", timeout=timeout)
         assert r.exit_code(timeout=10) == 0
+
+
+def test_export_env_persists_across_runs(timeout):
+    with Shell() as sh:
+        r1 = sh.run("export MY_VAR=hello", timeout=timeout)
+        assert r1.exit_code() == 0
+        r2 = sh.run("echo $MY_VAR", timeout=timeout)
+        assert list(r2.stdout) == ["hello"]
+        assert r2.exit_code() == 0
+
+
+def test_export_env_no_leak_between_shells(timeout):
+    with Shell() as sh1:
+        r = sh1.run("export SECRET=42", timeout=timeout)
+        assert r.exit_code() == 0
+    with Shell() as sh2:
+        r = sh2.run("echo ${SECRET:-empty}", timeout=timeout)
+        assert list(r.stdout) == ["empty"]
+
+
+def test_cancel_foreground_command(timeout):
+    with Shell() as sh:
+        r = sh.run("sleep 10", timeout=timeout)
+        time.sleep(0.3)
+        sh.cancel()
+        code = r.exit_code()
+        assert code is not None
+        r2 = sh.run("echo after_cancel", timeout=timeout)
+        assert list(r2.stdout) == ["after_cancel"]
+        assert r2.exit_code() == 0
